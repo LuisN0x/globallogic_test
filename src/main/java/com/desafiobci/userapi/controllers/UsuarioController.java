@@ -2,7 +2,6 @@ package com.desafiobci.userapi.controllers;
 
 import com.desafiobci.userapi.exceptions.ServiceCallException;
 import com.desafiobci.userapi.models.ResponseHandler;
-import com.desafiobci.userapi.models.UsuarioLoginModel;
 import com.desafiobci.userapi.models.UsuarioModel;
 import com.desafiobci.userapi.models.UsuarioSignUpModel;
 import com.desafiobci.userapi.repositories.UsuarioRepository;

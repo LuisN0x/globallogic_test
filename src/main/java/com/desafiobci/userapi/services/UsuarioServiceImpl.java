@@ -4,7 +4,6 @@ import com.desafiobci.userapi.entities.Telefono;
 import com.desafiobci.userapi.entities.Usuario;
 import com.desafiobci.userapi.exceptions.*;
 import com.desafiobci.userapi.models.TelefonoModel;
-import com.desafiobci.userapi.models.UsuarioLoginModel;
 import com.desafiobci.userapi.models.UsuarioModel;
 import com.desafiobci.userapi.models.UsuarioSignUpModel;
 import com.desafiobci.userapi.repositories.TelefonoRepository;
@@ -13,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -88,24 +84,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         Optional<Usuario> optionalUsuario = usuarioRepository.findByEmail(email);
         Usuario usuario = optionalUsuario.orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
 
-        /*
-        // Verificar la contraseña
-        if (!passwordEncoder.matches(password, usuario.getPassword())) {
-            throw new LoginValidationException("Credenciales inválidas");
-        }
-
-        // Verificar el token
-        if (!jwtTokenProviderService.validateToken(jwtToken, usuario.getEmail())) {
-            throw new LoginValidationException("Token inválido");
-        }
-
-        // Verificar si es Activo
-        if(!usuario.getIsActive()) {
-            throw new LoginValidationException("Usuario no está Activo");
-        }
-*/
         // Actualizar el token
         usuario.setToken(jwtTokenProviderService.generateToken(usuario.getEmail()));
+
+        //Actualizar lastLogin
+        usuario.setLastLogin(new Date());
 
         // Actualizar en BD el usuario
         usuarioRepository.save(usuario);
