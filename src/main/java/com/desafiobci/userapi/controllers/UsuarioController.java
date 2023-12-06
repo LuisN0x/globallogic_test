@@ -32,7 +32,7 @@ public class UsuarioController {
                 body(usuarioRepository.findAll());
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@RequestBody UsuarioSignUpModel usuarioSignUpModel) {
         try {
             UsuarioModel usuarioModel = usuarioService.signUp(usuarioSignUpModel);
