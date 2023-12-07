@@ -1,6 +1,8 @@
 # globallogic_test
 Ejercicio Java API Usuarios_GlobalLogic para cliente BCI
 
+Los diagramas del proyecto están en la carpeta /diagrams
+
 EndPoints:
 
 /signup
